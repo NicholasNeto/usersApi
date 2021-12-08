@@ -19,16 +19,15 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    const user = new User(); 
+    const user = new User();
 
-    Object.assign(category, {
+    Object.assign(user, {
       name,
-      description,
-      created_at: new Date()
-  })
+      email,
+    })
 
-  this.categories.push(category)
-
+    this.users.push(user)
+    return user
   }
 
   findById(id: string): User | undefined {

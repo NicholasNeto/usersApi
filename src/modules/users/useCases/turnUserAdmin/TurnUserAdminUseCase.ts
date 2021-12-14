@@ -9,15 +9,16 @@ class TurnUserAdminUseCase {
   constructor(private usersRepository: IUsersRepository) { }
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    
+    const user = this.usersRepository.findById(user_id);
 
-
-    const userAlreadyExists = this.usersRepository.findById(user_id);
-
-    if (userAlreadyExists) {
-      throw new Error(`User ${user_id} already exists`)
+    if( !user){
+      throw new Error(`user_id: ${user_id}, not found in users`)
     }
 
+    return this.usersRepository.turnAdmin(user)
+
+    
   }
 }
 

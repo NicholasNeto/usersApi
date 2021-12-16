@@ -8,7 +8,14 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) { }
 
   execute({ user_id }: IRequest): User[] {
-    return this.usersRepository.list()
+    const user =  this.usersRepository.findById(user_id)
+    
+    if (!user) {
+        throw new Error(`User ${user_id} not found`)
+    }
+
+    const users = this.usersRepository.list()
+    return users
   }
 }
 
